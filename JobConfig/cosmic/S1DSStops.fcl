@@ -4,6 +4,8 @@
 // Yuri Oksuzian, 2021
 #include "JobConfig/primary/primary.fcl"
 
+process_name : Primary
+
 physics.TriggerPath: [generate, genCounter, g4run, g4status, stepPointMomentumFilter, cosmicFilter, compressPV]
 outputs.Output.outputCommands : [@sequence::Primary.KeptProducts, "keep *_compressPV_*_*", "keep mu2e::GenParticles_*_*_*", "keep *_cosmicFilter_*_*"]
 physics.producers.g4run.TrajectoryControl: @local::mu2eg4DefaultTrajectories
