@@ -94,6 +94,12 @@ Cosmic: {
       inputs : [ "g4run:crvStage1" ]
       cutMomentumMin: 0. // Filter all particles that hit DS region
    }
+   compressPV : {
+      module_type: CompressPhysicalVolumes
+      volumesInput : "g4run"
+      hitInputs : []
+      particleInputs : [ "cosmicFilter" ]
+    }
    cosmicFilter: {
       module_type: FilterG4Out
       mainHitInputs : [ "g4run:crvStage1", "g4run:CRV" ]
@@ -103,13 +109,13 @@ Cosmic: {
    }
    dsResample: {
       module_type: ResamplingMixer
-      fileNames: @nil  
+      fileNames: @nil
       readMode: "sequential"
       wrapFiles: true
       mu2e: {
          products: {
 	    genParticleMixer: { mixingMap: [ [ "generate", "" ] ] }
-	    simParticleMixer: { mixingMap: [ [ "cosmicFilter", ""] ] } 
+	    simParticleMixer: { mixingMap: [ [ "cosmicFilter", ""] ] }
 	    mcTrajectoryMixer:{ mixingMap: [ [ "cosmicFilter", ""] ] }
 	    stepPointMCMixer: { mixingMap: [ [ "cosmicFilter:crvStage1", ":" ], [ "cosmicFilter:CRV", ":" ] ] }
          }
@@ -130,7 +136,7 @@ Cosmic: {
       primaryType: StepPoints
       primaryTag: "dsResample:crvStage1"
       inputMCTrajectories: "dsResample"
-      inputPhysVolumeMultiInfo: "" 
+      inputPhysVolumeMultiInfo: ""
    }
    Mu2eG4CommonCutCosmicS1: {
       type: union
